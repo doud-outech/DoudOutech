@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>doud.outech</title>
+    <style>
+        /* Scroll Effect */
+        html {
+            scroll-snap-type: y mandatory;
+        }
+        .sigmar-regular {
+            font-family: "Sigmar", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        *{
+            font-family: "Sigmar", serif;
+        }
+        .main-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 90vh;
+        }
+        .container {
+            height: 90vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            position: relative; /* Add this for positioning the arc */
+        }
+        .about-container {
+            height: 90vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        .creation-container{
+            height: 90vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        .projets-futur{
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;    
+        }
+        .contact-container{
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        /* --- NAVBAR --- */
+        .navbar-container {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            background: rgba(34, 34, 34, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: width 0.3s ease, height 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: auto;
+        }
+        .nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav ul li {
+            display: none;
+            padding: 8px;
+        }
+        .nav ul li:first-child {
+            display: block;
+        }
+        .nav ul li a {
+            text-decoration: none;
+            color: #eeff00;
+            font-size: 20px;
+            padding: 8px;
+            display: block;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .nav ul li a:hover {
+            color: #fff;
+            background: #1c1c1c;
+            border-radius: 8px;
+        }
+        /* --- ANIMATION --- */
+        .navbar-container.expanded {
+            width: 200px;
+            height: auto;
+            padding: 10px;
+        }
+        .navbar-container.expanded .nav ul li {
+            display: block;
+        }
+        /* Style Site */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .container, .about-container, .creation-container, .contact-container, .projets-futur{
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            width: 90%;
+            background: #fffcdc;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            position: relative; /* Add position here */
+        }
+        .text, .about-text {
+            flex: 1;
+            padding: 20px;
+        }
+        .text h1, .about-text h2 {
+            font-size: 50px;
+            margin: 0;
+        }
+        .text h1 span, .about-text h2 span {
+            color: #142810;
+        }
+        .text p, .about-text p {
+            font-size: 25px;
+            color: #142810;
+        }
+        .image, .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .image img, .about-image img {
+            max-width: 500px;
+            height: auto;
+        }
+        #titre-creation {
+            position: absolute;
+            top: 20px; /* Ajuste cette valeur selon le besoin */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            font-weight: bold;
+            color: #142810;
+        }
+        #contact-titre {
+            position: absolute;
+            top: 20px; /* Ajuste cette valeur selon le besoin */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            font-weight: bold;
+            color: #142810;
+        }
+        #contact-p{
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: italic;
+            color: #142810;
+        }
+        #p-creation {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: italic;
+            color: #142810;
+        }
+        #titre-projets {
+            position: absolute;
+            top: 20px; /* Ajuste cette valeur selon le besoin */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            font-weight: bold;
+            color: #142810;
+        }
+        @media (max-width: 768px) {
+            .container, .about-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            .image img, .about-image img {
+                max-width: 250px;
+            }
+        }
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 80px; /* Pour éviter que ça chevauche le titre */
+            flex-wrap: wrap; /* Permet de s'adapter aux petits écrans */
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        /* Style du titre dans la carte */
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        /* Style du texte dans la carte */
+        .card-text {
+            font-size: 16px;
+            color: #142810;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            width: 350px;
+            height: 350px;
+            perspective: 1000px;
+            cursor: pointer;
+            padding: 50px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card:hover .card-inner, .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card-front {
+            background-color: #ffffff;
+            color: white;
+        }
+
+        .card-back {
+            background-color: #2196F3;
+            color: white;
+            transform: rotateY(180deg);
+        }
+        .calendar {
+            width: 500px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+        .calendar::before, .calendar::after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background: gray;
+            position: absolute;
+            top: -10px;
+            border-radius: 4px;
+        }
+        .calendar::before {
+            left: 20px;
+        }
+        .calendar::after {
+            right: 20px;
+        }
+        .todo-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .todo-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .todo-item.completed label {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="navbar-container" id="navbar">
+            <nav class="nav">
+                <ul>
+                    <li><a href="#" id="toggle-menu">☰</a></li>
+                    <li><a href="#section1">🏠</a></li>
+                    <li><a href="#section2">📄</a></li>
+                    <li><a href="#section3">💥</a></li>
+                    <li><a href="#section4">💡</a></li>
+                    <li><a href="#section5">💬</a></li>
+                </ul>
+            </nav>
+        </div>
+
+
+        <div class="container" id="section1">
+            <div class="text">
+                <h1>Développeur <span>HTML</span><br>et <span>CSS</span></h1>
+                <p>Tout a un début !</p>
+            </div>
+            <div class="image">
+                <img src="image1.png" >
+            </div>
+        </div>
+
+        <div class="about-container" id="section2">
+            <div class="about-image">
+                <img src="image2.png" alt="">
+            </div>
+            <div class="about-text">
+                <h2>À propos !</h2>
+                <p>" Je suis un débutant, j'ai commencé avec Scratch et aujourd'hui je fais du HTML et CSS et des Apps. "</p>
+            </div>
+        </div>
+
+        <div class="creation-container" id="section3">
+            <div class="creation-text">
+                <h2 id="titre-creation">Mes créations !</h2>
+                <p id="p-creation">Toutes mes créations depuis le début</p>
+            </div>
+            <div class="cards-container">
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <img src="To do List.png" alt="logo">
+                        </div>
+                        <div class="card-face card-back">
+                            <p class="card-text">Une app de tâches et de projets...</p>
+                            <p class="card-text">https://mega.nz/folder/yAIVRLYD#fbadoorOSnc-xZ3LFhcP6g</p>  
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <img src="Colebrook.png" alt="logo">
+                        </div>
+                        <div class="card-face card-back">
+                            <p class="card-text">Une app pour calculer les pertes de charge.</p>
+                            <p class="card-text">https://mega.nz/folder/LAAynbII#O3QFIpdBe9zMNuS6hdVAZQ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="projets-futur" id="section4">
+            <h1 id="titre-projets">Projets Futurs</h1>
+            <div class="calendar">
+                <h3>Dans le futur</h3>
+                <div class="todo-item completed">
+                    <input type="checkbox" checked>
+                    <label>Faire ma To Do App</label>
+                </div>
+                <div class="todo-item completed">
+                    <input type="checkbox" checked>
+                    <label>App qui Calcule la pertes de charge</label>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox">
+                    <label>Faire une alternative de mon App de pertes</label>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox">
+                    <label>Crée un bot Discord</label>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox">
+                    <label>Crée un site Horloge (Numerique)</label>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox">
+                    <label>Crée un application météo</label>
+                </div>
+            </div>
+        </div>
+
+    <div class="contact-container" id="section5">
+        <div class="contact-img">
+        </div>
+        <div class="contact-text">
+            <h2 id="contact-titre">Contact !</h2>
+            <p id="contact-p">" Signaler tout bug ! "</p>
+        </div>
+        <form action="https://formspree.io/f/mgvojvaq" method="POST">
+            <div class="corps-formulaire">
+                <div class="gauche">
+                    <div class="groupe">
+                        <label>Votre Prénom</label>
+                        <input type="text" name="Prénom" required />
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="groupe">
+                        <label>Votre adresse e-mail</label>
+                        <input type="email" name="Email" required />
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="groupe">
+                        <label>Votre téléphone</label>
+                        <input type="text" name="Téléphone" />
+                        <i class="fas fa-mobile"></i>
+                    </div>
+                </div>
+        
+                <div class="droite">
+                    <div class="groupe">
+                        <label>Message</label>
+                        <textarea name="Message" required></textarea>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="pied-formulaire" align="center">
+                <button type="submit">Envoyer le message</button>
+            </div>
+        </form>
+        
+        
+    </div>
+  
+    <script>
+        document.getElementById('toggle-menu').addEventListener('click', function(event) {
+            event.preventDefault();
+            let navbar = document.getElementById('navbar');
+            navbar.classList.toggle('expanded');
+        });
+    </script>
+</body>
+</html>
